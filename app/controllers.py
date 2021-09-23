@@ -13,13 +13,22 @@ def create_user(new_user):
     session.commit()
 
 
-def get_user():
-    pass
+def get_user(user_id):
+    user = session.query(User).filter(User.id == user_id).first()
+
+    print(user.as_dict())
 
 
 def list_user():
-    pass
+    users = session.query(User).all()
+
+    list_users = [user.as_dict() for user in users]
+
+    print(list_users)
 
 
-def delete_user():
-    pass
+def delete_user(user_id):
+    user = session.query(User).filter(User.id == user_id).first()
+
+    session.delete(user)
+    session.commit()
